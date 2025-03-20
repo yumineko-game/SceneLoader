@@ -28,7 +28,7 @@ Unity 用のシーン遷移管理パッケージです。フェードエフェ�
 
 ## 使用方法
 
-### 基本的なシーン遷移
+### フェードシーン遷移
 
 ```csharp
 var cmd = new FadeLoadSceneCommand
@@ -41,4 +41,42 @@ var cmd = new FadeLoadSceneCommand
 await Router.Default.PublishAsync(cmd, cancellationToken);
 ```
 
-他、`FadeCommand`, `GotoSceneCommand`, `PopSceneCommand`, `PushSceneCommand` が用意されています。
+## アーキテクチャ
+### Reciver
+VitalRouterで発行されたコマンドを受け取り、コマンドに応じた処理を実行するクラスです。  
+すべてinternalで定義されており、直接操作することはできません。
+
+### Command
+Reciverを操作するためのコマンドです。  
+**非同期で実行され、完了するまでの間に新たに発行されたコマンドは無視されます。**
+
+- `FadeLoadSceneCommand`
+- `FadeCommand`
+- `GotoSceneCommand`
+- `PushSceneCommand`
+- `PopSceneCommand`
+
+が用意されています。
+
+#### FadeLoadSceneCommand
+フェードアウト -> シーンロード -> フェードインの順に実行するコマンドです。  
+シーンのロードはGotoで固定です。
+
+#### FadeCommand
+フェードを実行するコマンドです。
+開始時・終了時のの色や透過度を個別に設定できるため、このコマンドだけでフェードイン・アウトの両方を使い分けられます。
+
+#### GotoSceneCommand
+現在のシーンを上書きする形でシーンをロードします。
+
+#### PushSceneCommand
+現在のシーンに積み上げる形でシーンをロードします。  
+ロードしたシーンをアクティブにするオプションを指定できます。  
+主にメニューやオプションシーンなどで使用します。
+
+#### PopSceneCommand
+Pushしたシーンを指定した数だけアンロードします。
+
+### ReciverMapper
+ReciverのMapとUnmapは、static classであるReciverMapperによってアプリケーションの開始時と終了時に自動で実行されます。  
+これにより、使用する際はコマンドのPublishだけで実行できるようになっています。
