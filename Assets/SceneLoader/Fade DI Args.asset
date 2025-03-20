@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e37b00f06d24214a2a1af589d73cc88, type: 3}
+  m_Name: Fade DI Args
+  m_EditorClassIdentifier: 
+  _fadeMaterial: {fileID: -876546973899608171, guid: 6f813563f63228244b1c2737f0c1019a, type: 3}

@@ -1,0 +1,23 @@
+{
+  "name": "com.yumineko.sceneloader",
+  "version": "1.0.0",
+  "displayName": "SceneLoader",
+  "description": "シーン遷移を管理するパッケージ。フェード付きのシーン遷移をサポートします。",
+  "unity": "2022.3",
+  "documentationUrl": "https://github.com/yumineko-game/SceneLoader",
+  "keywords": [
+    "scene",
+    "loader",
+    "fade",
+    "transition"
+  ],
+  "author": {
+    "name": "Yumineko",
+    "url": "https://github.com/yumineko-game"
+  },
+  "dependencies": {
+    "com.cysharp.unitask": "2.5.0",
+    "com.vitalrouter": "1.0.0",
+    "com.litmotion": "1.0.0"
+  }
+} 
