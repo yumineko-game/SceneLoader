@@ -31,65 +31,14 @@ Unity 用のシーン遷移管理パッケージです。フェードエフェ�
 ### 基本的なシーン遷移
 
 ```csharp
-// シーンローダーの取得
-var sceneLoader = container.Resolve<SceneLoader>();
-
-// シーン遷移の実行
-await sceneLoader.LoadSceneAsync(
-    new SceneLoaderCommand
-    {
-        SceneName = "GameScene",
-        LoadSceneMode = LoadSceneMode.Single,
-        WaitForFade = true
-    },
-    cancellationToken
-);
-```
-
-### フェードエフェクトのカスタマイズ
-
-```csharp
-// フェードアウト
-await fader.FadeAsync(
-    new FadeCommand
-    {
-        Duration = 0.5f,
-        StartColor = Color.clear,
-        EndColor = Color.black,
-        StartStrength = 0,
-        EndStrength = 1
-    },
-    cancellationToken
-);
-```
-
-## 設定
-
-### フェードマテリアルの設定
-
-1. プロジェクト内に新しいマテリアルを作成
-2. シェーダーを「FadeShader」に設定
-3. SceneLoaderLifetimeScope にマテリアルを登録
-
-```csharp
-public class SceneLoaderLifetimeScope : LifetimeScope
+var cmd = new FadeLoadSceneCommand
 {
-    [SerializeField] private Material fadeMaterial;
-
-    protected override void Configure(IContainerBuilder builder)
-    {
-        builder.RegisterInstance(new FadeDIArgs { FadeMaterial = fadeMaterial });
-        builder.Register<Fader>(Lifetime.Singleton);
-        builder.Register<SceneLoader>(Lifetime.Singleton);
-    }
-}
+    SceneName = "SampleScene",
+    OutDuration = 1.0f,
+    InDuration = 1.0f,
+    FadeColor = Color.black
+};
+await Router.Default.PublishAsync(cmd, cancellationToken);
 ```
 
-## ライセンス
-
-このプロジェクトは MIT ライセンスの下で公開されています。詳細は[LICENSE](LICENSE)ファイルを参照してください。
-
-## 作者
-
-- Yumineko
-- GitHub: [yumineko-game](https://github.com/yumineko-game)
+他、`FadeCommand`, `GotoSceneCommand`, `PopSceneCommand`, `PushSceneCommand` が用意されています。
