@@ -18,18 +18,24 @@ Unity 用のシーン遷移管理パッケージです。フェードエフェ�
 - LitMotion 1.0.0
 
 ## インストール方法
-
+### UPM
 1. Unity Package Manager を開きます
 2. 「+」ボタンをクリックし、「Add package from git URL」を選択
 3. 以下の URL を入力：
    ```
    https://github.com/yumineko-game/SceneLoader.git?path=Assets/SceneLoader
    ```
+### 初期設定
+1. UniversalRendererDataに、`FullScreenPassRendererFeature`を追加し、`Fade Fullscreen ShaderGraph.mat`を設定。
+2. PreloadedAssetsにDIArgsを設定
+
+### 初期設定（2D）
+![image](https://github.com/user-attachments/assets/c2c8b587-258c-4bf7-92f1-9511ece91ed8)
+Renderer2DDataに`CameraSortingLayerTexture`を設定
 
 ## 使用方法
 
 ### フェードシーン遷移
-
 ```csharp
 var cmd = new FadeLoadSceneCommand
 {
